@@ -1,0 +1,6 @@
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (1, 'Adam', 'Mickiewicz', 23, 95, 36.76);
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (2, 'Jan', 'Mickiewicz', 28, 104, 36.6);
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (3, 'Ernest', 'Mickiewicz', 56, 82, 36.9);
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (4, 'Juliusz', 'Słowacki', 23, 88, 37.5);
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (1, 'Adam', 'Mickiewicz', 23, 95, 38.76);
+INSERT INTO persons (id, name, surname, age, height, temperature) VALUES (2, 'Jan', 'Mickiewicz', 23, 95, 39.76);

@@ -1,0 +1,4 @@
+
+run ksql cli in docker:
+* docker exec -it ksqldb-cli ksql http://ksqldb-server:8088 
+* winpty  docker exec -it ksqldb-cli ksql http://ksqldb-server:8088  //windows

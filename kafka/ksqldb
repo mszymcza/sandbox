@@ -1,0 +1,53 @@
+//stream creating
+CREATE OR REPLACE STREAM persons (id BIGINT, name VARCHAR, surname VARCHAR, age INT, height DOUBLE, temperature DOUBLE, city int)
+  WITH (kafka_topic='persons', value_format='json', partitions=1);
+
+//materialized view creating
+CREATE TABLE currentTemperature AS
+  SELECT id,
+         LATEST_BY_OFFSET(temperature) AS la
+  FROM persons
+  GROUP BY id
+  EMIT CHANGES;
+
+  |LATEST_BY_OFFSET - only last localization
+
+//queries 
+// push query - neverending query. It gets data from stream and push it
+SELECT * FROM persons
+  WHERE temperature >= 37.5 EMIT CHANGES;
+
+//pull query - like typical SQL query return value and terminate
+SELECT * FROM persons
+  WHERE temperature >= 37.5;
+
+//create stream as select from another stream
+CREATE STREAM persons_with_fever AS
+   SELECT 
+     id, 
+     temperature
+   FROM persons
+   WHERE temperature > 37.5
+   EMIT CHANGES;
+
+NOTES:
+
+// we can only add new fields to steam if we to want use CREATE OR REPLACE
+-> this is called 'in-place update'
+// if we have to remove sth from stream only option is drop and create
+-> called 'replacing upgrade'
+
+
+field type change:
+-> only option is RU
+
+Where we can use KSQLDB (from documentation): 
+Detect Unusual Credit Card Activity
+Handle corrupted data from Salesforce
+Match Users for Online Dating
+
+Short examples:
+https://ksqldb.io/examples.html
+
+Caveats:
+Usually, ksqlDB isn't a good fit for BI reports, ad-hoc querying, or queries with random access patterns, because it's a continuous query system on data streams.
