@@ -32,7 +32,7 @@ CREATE STREAM persons_with_fever AS
 
 NOTES:
 
-// we can only add new fields to steam if we to want use CREATE OR REPLACE
+// we can only add new fields to steam if we want to use CREATE OR REPLACE
 -> this is called 'in-place update'
 // if we have to remove sth from stream only option is drop and create
 -> called 'replacing upgrade'
